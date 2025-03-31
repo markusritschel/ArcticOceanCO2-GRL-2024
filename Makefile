@@ -24,6 +24,18 @@ endif
 
 .PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, documentation, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
+
+## Download data and make them available under ./data/
+download-data:
+	echo "Download data"
+	cd data/raw/ && \
+	wget https://www.ncei.noaa.gov/data/oceans/archive/arc0105/0160558/7.7/data/0-data/MPI_SOM-FFN_v2021/MPI-SOM_FFN_v2021_NCEI_OCADS.nc && \
+	wget https://static-content.springer.com/esm/art%3A10.1038%2Fs41558-020-0784-2/MediaObjects/41558_2020_784_MOESM3_ESM.csv && \
+	wget https://static-content.springer.com/esm/art%3A10.1038%2Fs41558-020-0784-2/MediaObjects/41558_2020_784_MOESM5_ESM.csv && \
+	wget https://download.pangaea.de/dataset/939210/files/pCO2_daily_1994_2019_western_Arctic_Ocean_20211011.nc && \
+	@echo "Please update the path of the data in the config file."
+
+
 ## Clean-up python artifacts, logs and jupyter-book built
 cleanup: clean-pyc clean-logs clean-docs
 
