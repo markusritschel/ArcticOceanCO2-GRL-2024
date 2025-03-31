@@ -1,6 +1,7 @@
 click
 cartopy
 cmcrameri
+cmocean
 colorama
 dask
 Deprecated
