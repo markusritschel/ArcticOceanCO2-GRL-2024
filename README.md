@@ -9,16 +9,21 @@ This repository hosts the code for the analysis and for producing the figures in
 In this project we investigate continuous fields of surface ocean pCO2 in the Arctic Oceann. 
 The data stem from the MPI-SOM-FFN data product (Landschützer, 2016), which uses a feed-forward neural network to fill gaps in the field of pCO2 observations.
 
+
+
 ## <u>Table of Contents</u> <!-- omit in toc -->
+<!-- Automatically created in VSCode with the `Markdown All in One` extension -->
 
 - [Preparation](#preparation)
   - [Cloning the project to your local machine](#cloning-the-project-to-your-local-machine)
   - [Setup](#setup)
   - [Make data available](#make-data-available)
 - [Re-creating the figures from the paper](#re-creating-the-figures-from-the-paper)
+- [Tips](#tips)
+  - [Plotting](#plotting)
 - [Project Structure](#project-structure)
 - [Maintainer](#maintainer)
-- [Contact \& Issues](#contact-issues)
+- [Contact \& Issues](#contact--issues)
 
 
 ## Preparation
@@ -70,9 +75,6 @@ to run the tests via `pytest` (this is optional but ensures that the code runs).
 > [!NOTE]
 > If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem.
 
-> [!NOTE]
-> If you want to compile the documentation, then also run `make install-doc-requirements`.
-> Make sure you install these _after_ the package requirements as the first one uses conda and the second one pip due to package availability in the respective repositories.
 
 ### Make data available
 
@@ -87,9 +89,28 @@ The figures from the paper can be created by running the respective scripts in t
 Make sure that the data are made available as described in the previous section.
 
 
+
+## Tips
+
+### Plotting
+
+To make your plots look more uniform, use a style sheet and apply it to all your plotting scripts.
+In the `./assets/mpl_styles/` directory, you find two basic style sheets that you can use as a starting point.
+More information on how to use style sheets can be found in the [Matplotlib documentation](https://matplotlib.org/stable/tutorials/introductory/customizing.html).
+Matplotlib also provides [a set of default stylesheets](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html), which you can also use.
+At the beginning of your plotting script, add the following lines:
+
+```python
+from arcticoceanco2_grl_2024 import BASE_DIR
+import matplotlib.pyplot as plt
+plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
+```
+
+
 ## Project Structure
 
     ├── assets             <- A place for assets like shapefiles or config files
+    │   └── mpl_styles     <- Matplotlib style sheets
     │
     ├── data               <- Contains all data used for the analyses in this project.
     │   │                     The sub-directories can be links to the actual location of your data.
@@ -128,10 +149,9 @@ Make sure that the data are made available as described in the previous section.
     ├── CHANGELOG.md       <- All major changes should go in there
     ├── LICENSE            <- The license used for this project
     ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
-    ├── pyproject.toml      <- Configuration file for the Python project
+    ├── pyproject.toml      <- Configuration file for the Python project (manages all dependencies)
     ├── README.md          <- The top-level README of this project
-    └── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-                              generated with `pip freeze > requirements.txt`
+    └── uv.lock            <- Lock file for reproducible dependency resolution (managed by UV)
 
 
 ## Maintainer

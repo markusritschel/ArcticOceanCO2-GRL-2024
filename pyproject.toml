@@ -1,27 +1,101 @@
-[build-system]
-requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "src"
+name = "arcticoceanco2_grl_2024"
+version = "0.1.0"
 description = "This project investigates continuous fields of surface ocean pCO2 in the Arctic Oceann. The data stem from the MPIM-SOM-FFN product (Landschützer, 2016), which uses a feed-forward neural network to fill gaps in the field of pCO2 observations."
 authors = [
   {name = "Markus Ritschel", email = "git@markusritschel.de"},
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-dynamic = ["version"]
 requires-python = ">= 3.10"
-dependencies = []
+dependencies = [
+  "click",
+  "colorama",
+  "dask",
+  "Deprecated",
+  "docopt",
+  "ipykernel",
+  "ipython",
+  "ipywidgets",
+  "jupytext",
+  "jupyterbook-latex",
+  "jupyterlab",
+  "jupyternotify",
+  "jupytext",
+  "markdown",
+  "matplotlib",
+  "mystmd",
+  "nodejs",
+  "numpy",
+  "pandas",
+  "pandoc",
+  "python-dotenv",
+  "rich",
+  "tqdm",
+  "typer",
+  "xarray"
+]
 
 
-[tool.setuptools.dynamic]
-version = {attr = "src.__version__"}
+[project.scripts]
+arcticoceanco2_grl_2024 = "arcticoceanco2_grl_2024.cli:app"
 
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["src"]
+[dependency-groups]
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"},
+  "pre-commit"
+]
+lint = [
+  "flake8",
+  "isort",
+  "ruff",
+  "ty",
+]
+test = [
+  "pytest",
+  "pytest-cov",
+  "safety",
+]
+docs = [
+"furo",
+  "jupyter-book",
+  "jupyterbook-latex",
+  "linkify-it-py",
+  "lxml_html_clean",
+  "myst-parser",
+  "nbsphinx",
+  "pydata-sphinx-theme",
+  "rinohtype",
+  "sphinx",
+  "sphinx-autoapi",
+  "sphinx-autobuild",
+  "sphinx-autodoc-defaultargs",
+  "sphinx-autodoc-typehints",
+  "sphinx-book-theme",
+  "sphinx-comments",
+  "sphinx-copybutton",
+  "sphinx-design",
+  "sphinx-immaterial",
+  "sphinx-issues",
+  "sphinx-rtd-theme",
+  "sphinx-tabs",
+  "sphinx-toolbox",
+  "sphinxcontrib-apidoc",
+  "sphinxcontrib-bibtex",
+  "sphinxcontrib-htmlhelp",
+  "sphinxcontrib-images",
+  "sphinxcontrib-mermaid",
+  "sphinxcontrib-napoleon",
+
+]
+
+
+[build-system]
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
+
 
 
 [tool.jupytext]
@@ -31,19 +105,28 @@ formats = "ipynb,py:percent,md:myst"
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "src/tests",
-    "src",
+  "tests",
+  "src",
 ]
 addopts = [
-    "--doctest-modules",
-    "--doctest-continue-on-failure",
-    "-ra -v",
-    "--cov=./src",
-    "--cov-report=xml",
-    "--cov-report=html",
-    "--cov-report=term-missing"
+  "--doctest-modules",
+  "--doctest-continue-on-failure",
+  "-ra -v",
+  "--cov=./src",
+  "--cov-report=xml",
+  "--cov-report=html",
+  "--cov-report=term-missing"
 ]
+
+
+[tool.uv]
+package = true
 
 
 [tool.cruft]
-skip = [".git/"]
+skip = [
+  ".git/", 
+  "docs/**/*.md",
+  "tests", 
+  "README.md"
+]

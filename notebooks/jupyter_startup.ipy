@@ -89,9 +89,9 @@ except:
 # ---------------------------------------------
 # make some standard paths available
 try:
-    from src import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
+    from arcticoceanco2_grl_2024 import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
 except:
-    raise Exception("Could not find `src`. Did you `make src-available`?")
+    raise Exception("Could not find arcticoceanco2_grl_2024. Did you `make src-available`?")
 
 
 # ---------------------------------------------
